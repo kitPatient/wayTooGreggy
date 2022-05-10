@@ -169,18 +169,18 @@ async def on_message(message):
                 #json_file.close()
 
     if message.content.startswith('$poll'):
-        not0the0flash = await client.fetch_user(IDnot0the0flash)
-        Gu = await client.fetch_user(IDguristic)
-        if message.author == not0the0flash or Gu:
+        #not0the0flash = await client.fetch_user(IDnot0the0flash)
+        #Gu = await client.fetch_user(IDguristic)
+        #if message.author == not0the0flash or Gu:     
+        
+        pollData = loadJsonData("json_poll.json")
             
-            pollData = loadJsonData("json_poll.json")
-            
-            x = discord.Embed(title=pollData["title"],color=0xFF5733)
-            x.set_thumbnail(url=linkGREGTECHLOGO)
-            x.add_field(name="Option A: ", value=pollData["a"], inline=True)
-            x.add_field(name="Option B: ", value=pollData["b"], inline=True)
-            mes = await message.channel.send(embed = x)
-            await addABReactions(mes)
+        x = discord.Embed(title=pollData["title"],color=0xFF5733)
+        x.set_thumbnail(url=linkGREGTECHLOGO)
+        x.add_field(name="Option A: ", value=pollData["a"], inline=True)
+        x.add_field(name="Option B: ", value=pollData["b"], inline=True)
+        mes = await message.channel.send(embed = x)
+        await addABReactions(mes)
             
             #with open('json_poll.json') as json_file:
                 #data = json.load(json_file)
