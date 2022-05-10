@@ -1,6 +1,5 @@
 import discord
 import json
-import re
 import random
 
 debugMode = False
