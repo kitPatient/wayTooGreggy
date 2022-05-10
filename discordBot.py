@@ -30,6 +30,9 @@ emojiB = '🇧'
 #Colors
 normalColor = 0xFF5733
 
+#DirectoryLinks
+
+
 #load the client
 client = discord.Client(activity=discord.Game(name=currentlyPlaying))
 
