@@ -99,97 +99,96 @@ async def on_message(message):
         await Mesage(message, "Hello")
 
     if message.content.startswith('$gtnh'):
-    	await EmbededWthPic(message,linkGTNH)
-
+        await EmbededWthPic(message,linkGTNH)
+        
     if message.content.startswith('$epoll1'):
-    	not0the0flash = await client.fetch_user(IDnot0the0flash)
-    	if message.author == not0the0flash:
-    		with open('json_poll.json') as json_file:
-    			data = json.load(json_file)
-    			await message.channel.send(data["a"])
-    			json_file.close()
+        not0the0flash = await client.fetch_user(IDnot0the0flash)
+        if message.author == not0the0flash:
+            with open('json_poll.json') as json_file:
+                data = json.load(json_file)
+                await message.channel.send(data["a"])
+                json_file.close()
 
     if message.content.startswith('$poll'):
-    	not0the0flash = await client.fetch_user(IDnot0the0flash)
-    	Gu = await client.fetch_user(IDguristic)
-    	if message.author == not0the0flash or Gu:
-    		with open('json_poll.json') as json_file:
-    			data = json.load(json_file)
-    			x = discord.Embed(title=data["title"],color=0xFF5733)
-    			x.set_thumbnail(url=linkGREGTECHLOGO)
-    			x.add_field(name="Option A: ", value=data["a"], inline=True)
-    			x.add_field(name="Option B: ", value=data["b"], inline=True)
-    			mes = await message.channel.send(embed = x)
-    			await addABReactions(mes)
-    			json_file.close()
+        not0the0flash = await client.fetch_user(IDnot0the0flash)
+        Gu = await client.fetch_user(IDguristic)
+        if message.author == not0the0flash or Gu:
+            with open('json_poll.json') as json_file:
+                data = json.load(json_file)
+                x = discord.Embed(title=data["title"],color=0xFF5733)
+                x.set_thumbnail(url=linkGREGTECHLOGO)
+                x.add_field(name="Option A: ", value=data["a"], inline=True)
+                x.add_field(name="Option B: ", value=data["b"], inline=True)
+                mes = await message.channel.send(embed = x)
+                await addABReactions(mes)
+                json_file.close()
 
     if message.content.startswith('$link'):
-    	await Mesage(message, linkREPO)
-
+        await Mesage(message, linkREPO)
+        
     if message.content.startswith('how do i craft '):
-    	await Mesage(message,"Use Jei. You Idiot!")
+        await Mesage(message,"Use Jei. You Idiot!")
 
     if message.content.startswith('how do i use channels'):
-    	await Mesage(message,"I don't know google it or something")
+        await Mesage(message,"I don't know google it or something")
 
     if message.content.startswith('E'):
-    	await Mesage(message,"E")
-
+        await Mesage(message,"E")
+        
     if message.content.startswith('nice'):
-    	await Mesage(message, "nice")
-
+        await Mesage(message, "nice")
+        
     if message.content.startswith('$flip'):
-    	x = random.randint(1,2)
-    	await message.channel.send(x)
-
+        x = random.randint(1,2)
+        await message.channel.send(x)
+        
     if message.content.startswith('Bot should '):
-    	x = random.randint(1,2)
-    	if x == 1:
-    		await Mesage(message,"Yes")
-    		return
-    	else:
-    		await Mesage(message,"No")
-
-
+        x = random.randint(1,2)
+        if x == 1:
+            await Mesage(message,"Yes")
+            return
+        else:
+            await Mesage(message,"No")
+                     
     if message.content.startswith('$status'):
-    	versionj = open("version.json", "r")
-    	versionr = versionj.read()
-    	version = json.loads(versionr)
-    	versionj.close()
-    	print(version)
-    	await message.channel.send(version["version"])
-
+        versionj = open("version.json", "r")
+        versionr = versionj.read()
+        version = json.loads(versionr)
+        versionj.close()
+        print(version)
+        await message.channel.send(version["version"])
+        
     if message.content.startswith('$newPoll '):
-    	text = message.content
-    	if len(text) > 8:
-    		result = find_between(text[8:],"(",")")
-    		if len(result)>6:
-    			lists = result.split(",")
-    			if len(lists)==3:
-    				dicti = {"title":lists[0],"a":lists[1],"b":lists[2]}
-    				saveDict(dicti)
-    				await message.channel.send("Poll Created Successfully!")
-
+        text = message.content
+        if len(text) > 8:
+            result = find_between(text[8:],"(",")")
+            if len(result)>6:
+                lists = result.split(",")
+                if len(lists)==3:
+                    dicti = {"title":lists[0],"a":lists[1],"b":lists[2]}
+                    saveDict(dicti)
+                    await message.channel.send("Poll Created Successfully!")
+                    
     if message.content.startswith("$setStatus "):
-    	text = message.content
-    	if len(text)>10:
-    		result = find_between(text[10:],"(",")")
-    		updateVersion(result)
-    		await message.channel.send("Status Set to: " + result)
-
+        text = message.content
+        if len(text)>10:
+            result = find_between(text[10:],"(",")")
+            updateVersion(result)
+            await message.channel.send("Status Set to: " + result)
+            
     if message.content.startswith('$help'):
-    	x = discord.Embed(title="Command Display",color=0xFF5733)
-    	x.set_thumbnail(url=linkGREGTECHLOGO)
-    	x.add_field(name="$hello", value=commandHelp["commands"]["hello"], inline=False)
-    	x.add_field(name="$gtnh", value=commandHelp["commands"]["gtnh"], inline=False)
-    	x.add_field(name="$poll", value=commandHelp["commands"]["poll"], inline=False)
-    	x.add_field(name="$link", value=commandHelp["commands"]["link"], inline=False)
-    	x.add_field(name="$newPoll", value=commandHelp["commands"]["newPoll"], inline=False)
-    	x.add_field(name="$flip", value=commandHelp["commands"]["flip"], inline=False)
-    	x.add_field(name="$status", value=commandHelp["commands"]["status"], inline=False)
-    	x.add_field(name="$setStatus", value=commandHelp["commands"]["setStatus"],inline=False)
-    	x.add_field(name="$help", value=commandHelp["commands"]["help"], inline=False)
-    	mes = await message.channel.send(embed = x)
+        x = discord.Embed(title="Command Display",color=0xFF5733)
+        x.set_thumbnail(url=linkGREGTECHLOGO)
+        x.add_field(name="$hello", value=commandHelp["commands"]["hello"], inline=False)
+        x.add_field(name="$gtnh", value=commandHelp["commands"]["gtnh"], inline=False)
+        x.add_field(name="$poll", value=commandHelp["commands"]["poll"], inline=False)
+        x.add_field(name="$link", value=commandHelp["commands"]["link"], inline=False)
+        x.add_field(name="$newPoll", value=commandHelp["commands"]["newPoll"], inline=False)
+        x.add_field(name="$flip", value=commandHelp["commands"]["flip"], inline=False)
+        x.add_field(name="$status", value=commandHelp["commands"]["status"], inline=False)
+        x.add_field(name="$setStatus", value=commandHelp["commands"]["setStatus"],inline=False)
+        x.add_field(name="$help", value=commandHelp["commands"]["help"], inline=False)
+        mes = await message.channel.send(embed = x)
 
 #Run the client
 client.run(botToken)
