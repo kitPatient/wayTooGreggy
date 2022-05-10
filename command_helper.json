@@ -1,0 +1,14 @@
+{
+	"Project Status": "0.0.2",
+	"commands": {
+		"hello": "Responds with 'Hello!'",
+		"gtnh": "Responds with the crafting recipe of the furnace",
+		"poll": "Displays the current Poll, and adds reactions",
+		"link": "Provides the link to the github Repo",
+		"newPoll": "formatted like (TITLE, OPTION 1, OPTION 2) then saves that poll",
+		"flip": "Provides a 1 or 2, if you want to flip a coin",
+		"status": "Provides the current version of the pack",
+		"setStatus": "formatted like (STATUS), then saves the status",
+		"help": "Shows this menu"
+	}
+}
