@@ -31,7 +31,9 @@ emojiB = '🇧'
 normalColor = 0xFF5733
 
 #DirectoryLinks
-
+dirCommandHelper = "command_helper.json"
+dirVersion = "version.json"
+dirPoll = "json_poll.json"
 
 #load the client
 client = discord.Client(activity=discord.Game(name=currentlyPlaying))
@@ -115,7 +117,7 @@ async def EmbededWthPic(message, url, color=normalColor):
 #Reloads The Help Commands each time, allows for changing
 #the .json an it come up in the bot, without stopping the bot
 def loadHelpEmbed(color = normalColor):
-    NcommandHelp = loadJsonData("command_helper.json")
+    NcommandHelp = loadJsonData(dirCommandHelper)
     NCcommandHelp = NcommandHelp["commands"]
     x = discord.Embed(title="Command Display",color=color)
     x.set_thumbnail(url=linkGREGTECHLOGO)
@@ -173,7 +175,7 @@ async def on_message(message):
     if message.content.startswith('{0}epoll1'.format(suffix)):
         not0the0flash = await client.fetch_user(IDnot0the0flash)
         if message.author == not0the0flash:
-            pollData = loadJsonData("json_poll.json")
+            pollData = loadJsonData(dirPoll)
             await Mesage(message, pollData["a"])
             #with open('json_poll.json') as json_file:
                 #data = json.load(json_file)
@@ -185,7 +187,7 @@ async def on_message(message):
         #Gu = await client.fetch_user(IDguristic)
         #if message.author == not0the0flash or Gu:     
         
-        pollData = loadJsonData("json_poll.json")
+        pollData = loadJsonData(dirPoll)
             
         x = discord.Embed(title=pollData["title"],color=normalColor)
         x.set_thumbnail(url=linkGREGTECHLOGO)
@@ -237,7 +239,7 @@ async def on_message(message):
         #version = json.loads(versionr)
         #versionj.close()
         
-        version = loadJsonData("version.json")
+        version = loadJsonData(dirVersion)
         
         #print(version)
         await message.channel.send(version["version"])
@@ -250,7 +252,7 @@ async def on_message(message):
                 lists = result.split(",")
                 if len(lists)==3:
                     newPoll = {"title":lists[0],"a":lists[1],"b":lists[2]}
-                    dumpJsonData("json_poll.json",newPoll)
+                    dumpJsonData(dirPoll,newPoll)
                     #saveDict(newPoll)
                     await message.channel.send("Poll Created Successfully!")
                     
@@ -260,7 +262,7 @@ async def on_message(message):
             result = find_between(text[10:],"(",")")
             #updateVersion(result)
             versionData = {"version": result}
-            dumpJsonData("version.json", versionData)
+            dumpJsonData(dirVersion, versionData)
             await message.channel.send("Status Set to: " + result)
             
     if message.content.startswith('{0}help'.format(suffix)):
