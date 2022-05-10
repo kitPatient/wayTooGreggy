@@ -6,6 +6,9 @@ import random
 debugMode = False
 
 '''---------COMMON VARIABLES AND LINKS---------'''
+#Assigns the suffix used for the commands
+suffix = "$"
+
 #What displays the bot as currently playing
 currentlyPlaying = "Not Too Greggy"
  
@@ -23,6 +26,9 @@ IDguristic = 738112885196062813
 #Emojis
 emojiA = '🇦'
 emojiB = '🇧'
+
+#Colors
+normalColor = 0xFF5733
 
 #load the client
 client = discord.Client(activity=discord.Game(name=currentlyPlaying))
@@ -97,15 +103,18 @@ async def Mesage(message, response):
 async def EmbedMessage(message,response):
     return await message.channel.send(embed=response)
 
-async def EmbededWthPic(message, url, colorx=0xFF5733):
-    x = discord.Embed(color=colorx)
+async def EmbededWthPic(message, url, color=normalColor):
+    x = discord.Embed(color=color)
     x.set_image(url=url)
     return await EmbedMessage(message,x)
 
-def loadHelpEmbed():
+
+#Reloads The Help Commands each time, allows for changing
+#the .json an it come up in the bot, without stopping the bot
+def loadHelpEmbed(color = normalColor):
     NcommandHelp = loadJsonData("command_helper.json")
     NCcommandHelp = NcommandHelp["commands"]
-    x = discord.Embed(title="Command Display",color=0xFF5733)
+    x = discord.Embed(title="Command Display",color=color)
     x.set_thumbnail(url=linkGREGTECHLOGO)
     x.add_field(name="$hello", value=NCcommandHelp["hello"], inline=False)
     x.add_field(name="$gtnh", value=NCcommandHelp["gtnh"], inline=False)
@@ -152,13 +161,13 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$hello'):
+    if message.content.startswith('{0}hello'.format(suffix)):
         await Mesage(message, "Hello")
 
-    if message.content.startswith('$gtnh'):
+    if message.content.startswith('{0}gtnh'.format(suffix)):
         await EmbededWthPic(message,linkGTNH)
         
-    if message.content.startswith('$epoll1'):
+    if message.content.startswith('{0}epoll1'.format(suffix)):
         not0the0flash = await client.fetch_user(IDnot0the0flash)
         if message.author == not0the0flash:
             pollData = loadJsonData("json_poll.json")
@@ -168,14 +177,14 @@ async def on_message(message):
                 #await message.channel.send(data["a"])
                 #json_file.close()
 
-    if message.content.startswith('$poll'):
+    if message.content.startswith('{0}poll'.format(suffix)):
         #not0the0flash = await client.fetch_user(IDnot0the0flash)
         #Gu = await client.fetch_user(IDguristic)
         #if message.author == not0the0flash or Gu:     
         
         pollData = loadJsonData("json_poll.json")
             
-        x = discord.Embed(title=pollData["title"],color=0xFF5733)
+        x = discord.Embed(title=pollData["title"],color=normalColor)
         x.set_thumbnail(url=linkGREGTECHLOGO)
         x.add_field(name="Option A: ", value=pollData["a"], inline=True)
         x.add_field(name="Option B: ", value=pollData["b"], inline=True)
@@ -192,7 +201,7 @@ async def on_message(message):
                 #await addABReactions(mes)
                 #json_file.close()
 
-    if message.content.startswith('$link'):
+    if message.content.startswith('{0}link'.format(suffix)):
         await Mesage(message, linkREPO)
         
     if message.content.startswith('how do i craft '):
@@ -207,7 +216,7 @@ async def on_message(message):
     if message.content.startswith('nice'):
         await Mesage(message, "nice")
         
-    if message.content.startswith('$flip'):
+    if message.content.startswith('{0}flip'.format(suffix)):
         x = random.randint(1,2)
         await message.channel.send(x)
         
@@ -219,7 +228,7 @@ async def on_message(message):
         else:
             await Mesage(message,"No")
                      
-    if message.content.startswith('$status'):
+    if message.content.startswith('{0}status'.format(suffix)):
         #versionj = open("version.json", "r")
         #versionr = versionj.read()
         #version = json.loads(versionr)
@@ -230,7 +239,7 @@ async def on_message(message):
         #print(version)
         await message.channel.send(version["version"])
         
-    if message.content.startswith('$newPoll '):
+    if message.content.startswith('{0}newPoll '.format(suffix)):
         text = message.content
         if len(text) > 8:
             result = find_between(text[8:],"(",")")
@@ -242,7 +251,7 @@ async def on_message(message):
                     #saveDict(newPoll)
                     await message.channel.send("Poll Created Successfully!")
                     
-    if message.content.startswith("$setStatus "):
+    if message.content.startswith("{0}setStatus ".format(suffix)):
         text = message.content
         if len(text)>10:
             result = find_between(text[10:],"(",")")
@@ -251,7 +260,7 @@ async def on_message(message):
             dumpJsonData("version.json", versionData)
             await message.channel.send("Status Set to: " + result)
             
-    if message.content.startswith('$help'):
+    if message.content.startswith('{0}help'.format(suffix)):
         
         #x = discord.Embed(title="Command Display",color=0xFF5733)
         #x.set_thumbnail(url=linkGREGTECHLOGO)
