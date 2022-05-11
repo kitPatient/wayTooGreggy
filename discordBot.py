@@ -170,20 +170,32 @@ async def on_message(message):
     x = loadJsonData("commands.json")
     mess = message.content
     #mess = suffix+mess
-    print(mess)
+    
+    if mess.startswith(suffix):
+        mess = mess[1:]
+    
+    mess = mess.lower()
+    if debugMode:
+        print(mess)
     
     try:
         command = x[mess]
-        await Mesage(message, "COMMAND")
-        print("COMMAND")
-        await Mesage(message, command)
-        print(command)
-        await Mesage(message, "------------------")
-        print("------")
-        await Mesage(message, "MESSAGE")
-        print("MESSAGE")
-        await Mesage(message, mess)
-        print(mess)
+        if debugMode:
+            await Mesage(message, "COMMAND")
+            print("COMMAND")
+            await Mesage(message, command)
+            print(command)
+            await Mesage(message, "------------------")
+            print("------")
+            await Mesage(message, "MESSAGE")
+            print("MESSAGE")
+            await Mesage(message, mess)
+            print(mess)
+        #
+        if x[mess]["actionType"] == "basicResponse":
+            #print("Basic Response Action")
+            await Mesage(message,x[mess]["response"])
+        
     except KeyError:
         if debugMode:
             print("ERROR: COMMAND NOT FOUND")

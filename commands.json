@@ -1,6 +1,6 @@
 {
     "hello":{
         "actionType":"basicResponse",
-        "response": "hello"
+        "response": "hello!!"
     }
 }
