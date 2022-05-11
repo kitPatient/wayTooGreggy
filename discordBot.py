@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+from email.message import Message
 import discord
 import json
 import random
@@ -164,7 +166,32 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
+    
+    x = loadJsonData("commands.json")
+    mess = message.content
+    #mess = suffix+mess
+    print(mess)
+    
+    try:
+        command = x[mess]
+        await Mesage(message, "COMMAND")
+        print("COMMAND")
+        await Mesage(message, command)
+        print(command)
+        await Mesage(message, "------------------")
+        print("------")
+        await Mesage(message, "MESSAGE")
+        print("MESSAGE")
+        await Mesage(message, mess)
+        print(mess)
+    except KeyError:
+        if debugMode:
+            print("ERROR: COMMAND NOT FOUND")
+        return
+    
+    
+    
+'''
     if message.content.startswith('{0}hello'.format(suffix)):
         await Mesage(message, "Hello")
 
@@ -281,6 +308,6 @@ async def on_message(message):
         helpEmbed = loadHelpEmbed()
         
         mes = await message.channel.send(embed = helpEmbed)
-
+'''
 #Run the client
 client.run(botToken)
