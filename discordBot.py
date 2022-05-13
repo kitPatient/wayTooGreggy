@@ -164,12 +164,16 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    
     if message.author == client.user:
         return
     
+    if message.content.startswith(suffix+"help"):
+        helpEmbed = loadHelpEmbed()
+        await message.channel.send(embed = helpEmbed)
+    
     x = loadJsonData("commands.json")
     mess = message.content
-    #mess = suffix+mess
     
     if mess.startswith(suffix):
         mess = mess[1:]
@@ -182,19 +186,22 @@ async def on_message(message):
         command = x[mess]
         if debugMode:
             await Mesage(message, "COMMAND")
-            print("COMMAND")
             await Mesage(message, command)
-            print(command)
             await Mesage(message, "------------------")
-            print("------")
             await Mesage(message, "MESSAGE")
-            print("MESSAGE")
             await Mesage(message, mess)
+            print("COMMAND")
+            print(command)
+            print("------")
+            print("MESSAGE")
             print(mess)
-        #
+            
         if x[mess]["actionType"] == "basicResponse":
             #print("Basic Response Action")
             await Mesage(message,x[mess]["response"])
+            
+        if x[mess]["actionType"] == "embedPictureResponse":
+            await EmbededWthPic(message,x[mess]["link"])
         
     except KeyError:
         if debugMode:

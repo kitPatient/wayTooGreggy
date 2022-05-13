@@ -2,5 +2,9 @@
     "hello":{
         "actionType":"basicResponse",
         "response": "hello!!"
+    },
+    "gtnh":{
+        "actionType":"embedPictureResponse",
+        "link":"https://cdn.discordapp.com/attachments/963701404843794432/972601235511328858/unknown.png"
     }
 }
